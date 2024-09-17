@@ -8,6 +8,7 @@
     border: 0;
 }
 
+
 .cartitems-format-main {
     display: grid;
     grid-template-columns: 0.5fr 2fr 1fr 1fr 1fr 1fr;
@@ -129,4 +130,107 @@
     border-color: #ff5a5a; /* Change border color on hover/focus */
     box-shadow: 0px 4px 12px rgba(255, 90, 90, 0.2); /* Stronger shadow on hover/focus */
     background: #fff; /* Pure white background on hover/focus */
+}
+
+/* ========== Media Queries for Responsiveness ========== */
+
+/* Tablet (max-width: 1024px) */
+@media (max-width: 1024px) {
+    .cartitems {
+        margin: 40px 40px;
+    }
+
+    .cartitems-format-main {
+        grid-template-columns: 0.5fr 1.5fr 1fr 1fr 1fr; /* Fewer columns for tablets */
+        gap: 50px;
+        font-size: 16px;
+    }
+
+    .cartitems-total {
+        margin-right: 50px;
+    }
+
+    .cartitems-total button {
+        width: 200px;
+        height: 50px;
+        font-size: 14px;
+    }
+
+    .cartitems-remove-icon {
+        margin: 0px 20px;
+    }
+
+    .cartitems-promobox input {
+        width: 250px;
+    }
+}
+
+/* Mobile (max-width: 768px) */
+@media (max-width: 768px) {
+    .cartitems {
+        margin: 20px 10px;
+    }
+
+    /* Stack the grid items vertically */
+    .cartitems-format-main {
+        display: block; /* Vertical stacking */
+        padding: 10px 0px;
+        font-size: 15px;
+    }
+
+    .cartitems-format {
+        display: grid;
+        grid-template-columns: 0.5fr 2fr 1fr;
+        gap: 20px;
+        padding: 15px 0px;
+        align-items: center;
+    }
+
+    .cartitems-total {
+        margin-right: 0px;
+        padding: 20px;
+    }
+
+    .cartitems-total button {
+        width: 100%;
+        height: 50px;
+    }
+
+    /* Adjust remove icon */
+    .cartitems-remove-icon {
+        margin: 0px;
+    }
+
+    /* Adjust input field for promo code */
+    .cartitems-promobox {
+        flex-direction: column;
+        padding: 10px;
+        height: auto;
+    }
+
+    .cartitems-promobox input {
+        width: 100%;
+        height: 40px;
+    }
+
+    .cartitems-promobox button {
+        width: 100%;
+        margin-top: 10px;
+    }
+
+    /* Adjust the cart items down container for mobile */
+    .cartitems-down {
+        flex-direction: column;
+        margin: 20px 0px;
+    }
+
+    .carticon-product-icon {
+        height: 50px;
+    }
+
+    .cartitems-quantity {
+        width: 50px;
+        height: 40px;
+        font-size: 16px;
+    }
 }

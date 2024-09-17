@@ -82,3 +82,125 @@
     background: red;
     color: white;
 }
+
+/* Hamburger Menu Icon - initially hidden */
+.hamburger {
+    display: none;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 30px;
+    height: 21px;
+    cursor: pointer;
+}
+
+.hamburger .line {
+    width: 100%;
+    height: 3px;
+    background-color: #000;
+    border-radius: 2px;
+}
+
+/* Navigation Menu */
+.nav-menu {
+    display: flex;
+    align-items: center;
+    list-style: none;
+    gap: 50px;
+    color: #626262;
+    font-size: 20px;
+    font-weight: 500;
+}
+
+.nav-menu li {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 3px;
+    cursor: pointer;
+}
+
+.nav-menu hr {
+    border: none;
+    width: 80%;
+    height: 3px;
+    border-radius: 10px;
+    background: #FF4141;
+}
+
+/* Login and Cart Section */
+.nav-login-cart {
+    display: flex;
+    align-items: center;
+    gap: 45px;
+}
+
+/* Shopping Cart Count */
+.nav-cart-count {
+    width: 22px;
+    height: 22px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: -35px;
+    margin-left: -55px;
+    border-radius: 11px;
+    font-size: 14px;
+    background: red;
+    color: white;
+}
+
+/* Media Queries for Hamburger Menu */
+
+/* Mobile Screens (max-width: 768px) */
+@media (max-width: 768px) {
+    .navbar {
+        padding: 16px 20px;
+    }
+
+    .nav-menu {
+        position: absolute;
+        top: 70px; /* Adjust based on your navbar height */
+        right: 0;
+        flex-direction: column;
+        background-color: white;
+        gap: 20px;
+        padding: 20px;
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+        width: 100%;
+        height: 100vh;
+        transform: translateY(-100%);
+        transition: transform 0.3s ease-in-out;
+        display: none; /* Hidden initially */
+    }
+
+    .nav-menu.open {
+        display: flex; /* Show menu when open */
+        transform: translateY(0); /* Slide the menu down */
+    }
+
+    .nav-menu li {
+        font-size: 20px;
+    }
+
+    .nav-login-cart {
+        display: none; /* Hide login and cart on mobile menu */
+    }
+
+    /* Hamburger Icon Visibility */
+    .hamburger {
+        display: flex; /* Show hamburger icon on mobile screens */
+        padding: 30px;
+    }
+}
+
+/* Small Mobile Screens (max-width: 480px) */
+@media (max-width: 480px) {
+    .nav-logo p {
+        font-size: 24px;
+    }
+
+    .nav-menu li {
+        font-size: 18px;
+    }
+}
