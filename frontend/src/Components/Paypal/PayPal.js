@@ -1,39 +1,61 @@
-import React, {useRef, useEffect } from 'react'
+import React, { useRef, useEffect, useContext } from 'react';
+import { ShopContext } from '../../Context/ShopContext';
 
 function PayPal() {
+    const paypal = useRef();
+    const { cartItems, all_product, getTotalCartAmount } = useContext(ShopContext);
 
-    const paypal = useRef()
+    // Create the purchase_units based on the cart items
+    const createPurchaseUnits = () => {
+        const items = all_product
+            .filter(product => cartItems[product.id] > 0)
+            .map(product => ({
+                name: product.name,
+                unit_amount: {
+                    currency_code: 'CAD', // Adjust currency if needed
+                    value: product.new_price,
+                },
+                quantity: cartItems[product.id],
+            }));
+
+        return [{
+            description: 'Cart Purchase',
+            amount: {
+                currency_code: 'CAD', // Adjust currency if needed
+                value: getTotalCartAmount(),
+                breakdown: {
+                    item_total: {
+                        currency_code: 'CAD',
+                        value: getTotalCartAmount(),
+                    },
+                },
+            },
+            items: items,
+        }];
+    };
 
     useEffect(() => {
         window.paypal
             .Buttons({
-                createOrder: (data, actions, err) => {
+                createOrder: (data, actions) => {
                     return actions.order.create({
-                        intent: "CAPTURE",
-                        purchase_units: [
-                            {
-                                description: "Cool looking table",
-                                amount: {
-                                    currency_code: "CAD",
-                                    value: 50.00,
-                                },
-                            },
-                        ],
+                        intent: 'CAPTURE',
+                        purchase_units: createPurchaseUnits(),
                     });
                 },
-            onApprove: async (data, actions) => {
-                const order = await actions.order.capture();
-                console.log(order);
-            },
-            onError: (err) => {
-                console.log(err);
-            }
-        }).render(paypal.current);
-    }, [])
+                onApprove: async (data, actions) => {
+                    const order = await actions.order.capture();
+                    console.log(order);
+                    // Add any additional logic you want after the order is approved
+                },
+                onError: (err) => {
+                    console.error(err);
+                },
+            })
+            .render(paypal.current);
+    }, [cartItems, all_product, getTotalCartAmount]); // Rerun if cart data changes
 
-    return (
-        <div ref={paypal}></div>
-    );
+    return <div ref={paypal}></div>;
 }
 
-export default PayPal
+export default PayPal;
