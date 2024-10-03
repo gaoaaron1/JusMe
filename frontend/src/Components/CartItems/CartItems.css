@@ -132,6 +132,63 @@
     background: #fff; /* Pure white background on hover/focus */
 }
 
+/* Modal Overlay */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.7); /* Dark background */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000; /* Ensure it sits on top */
+}
+
+/* Modal Content */
+.modal-content {
+    background-color: white;
+    padding: 100px; /* Adjusted for better padding */
+    border-radius: 8px;
+    width: 500px;
+    max-width: 90%;
+    max-height: 80vh; /* Limit height to 80% of the viewport height */
+    overflow-y: auto; /* Enable vertical scrolling */
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    position: relative;
+}
+
+.close-modal {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    background: #ff5a5a; /* Red background */
+    color: white; /* White "X" text */
+    background: none;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+/* Styling for smooth transition */
+.modal-content button {
+    background-color: #ff5a5a;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-top: 10px;
+    display: block;               /* Ensure the button is treated as a block element */
+    margin: 0 auto;               /* Center the button horizontally */
+}
+
+.modal-content button:hover {
+    background-color: rgb(101, 30, 4);
+}
+
+
 /* ========== Media Queries for Responsiveness ========== */
 
 /* Tablet (max-width: 1024px) */

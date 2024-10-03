@@ -1,22 +1,10 @@
-import React, { useState } from 'react';
+import React from 'react';
 import PayPal from '../Components/Paypal/PayPal';
 
 const Transaction = () => {
-    const [checkout, setCheckout] = useState(false);
-
     return (
         <div>
-            {checkout ? (
-                <PayPal />
-            ) : (
-            <button 
-                onClick={() => {
-                    setCheckout(true);
-                }}
-            >
-                Checkout 
-            </button>
-            )}
+            <PayPal /> {/* Directly rendering PayPal component */}
         </div>
     );
 };

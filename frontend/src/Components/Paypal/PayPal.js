@@ -43,10 +43,10 @@ function PayPal() {
                         purchase_units: createPurchaseUnits(),
                     });
                 },
-                onApprove: async (data, actions) => {
-                    const order = await actions.order.capture();
-                    console.log(order);
-                    // Add any additional logic you want after the order is approved
+                onApprove: function (data, actions) {
+                    return actions.order.capture().then(function (details) {
+                    alert("Transaction completed by " + details.payer.name.given_name)
+                    })
                 },
                 onError: (err) => {
                     console.error(err);

@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'; // Added useState
+import React, { useContext, useState } from 'react';
 import './CartItems.css';
 import { ShopContext } from '../../Context/ShopContext';
 import remove_icon from '../Assets/cart_cross_icon.png';
@@ -46,7 +46,7 @@ const CartItems = () => {
                                     className='cartitems-remove-icon' 
                                     src={remove_icon} 
                                     onClick={() => { removeFromCart(e.id) }} 
-                                    alt="" 
+                                    alt="Remove Icon" 
                                 />
                             </div>
                             <hr />
