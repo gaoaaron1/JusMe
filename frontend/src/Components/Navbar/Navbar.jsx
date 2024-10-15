@@ -1,12 +1,15 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import './Navbar.css'; // Import CSS
-import { Link } from 'react-router-dom';
 import logo from '../Assets/logo.png';
+import cart_icon from '../Assets/cart_icon.png';
+import { Link } from 'react-router-dom';
+import { ShopContext } from '../../Context/ShopContext';
 
 const Navbar = () => {
   //======================== USE STATES ========================//
 
   const [menu, setMenu] = useState("shop");
+  const { getTotalCartItems } = useContext(ShopContext);
   const [expanded, setExpanded] = useState(true); // Manage sidebar state
   const [openDropdown, setOpenDropdown] = useState(null); // State for dropdown
 
@@ -22,7 +25,7 @@ const Navbar = () => {
 
   const handleMenuItemClick = (menuItem) => {
     setMenu(menuItem);
-};
+  };
 
   const scrollToElement = (targetId, offset = 50) => {
     const targetElement = document.getElementById(targetId);
@@ -36,17 +39,11 @@ const Navbar = () => {
     }
   };
 
-  // Menu items from Navbar2
+  // Menu items from Navbar
   const menuItems = [
     { name: "Shop", path: "/" },
     { name: "About", path: "/about" },
     { name: "Contact", path: "/contact" },
-    { name: "Categories", subItems: [
-        { name: "Mens", path: "/mens" },
-        { name: "Womens", path: "/womens" },
-        { name: "Kids", path: "/kids" }
-      ]
-    }
   ];
 
   return (
@@ -57,46 +54,52 @@ const Navbar = () => {
         className={`sidebar2 ${expanded ? 'expanded' : ''}`}
       >
         <ul className="nav-grid">
+          
 
-
-            <div className="nav-logo">
+        <div className="nav-logo">
                     <img src={logo} alt="Logo" />
                     <p>JUSME</p>
+        </div>
+
+          <ul className={`nav-menu`}>
+            {menuItems.map((item) => (
+              <li key={item.name} onClick={() => handleMenuItemClick(item.name)}>
+                <Link to={item.path}>{item.name}</Link>
+                {menu === item.name && <hr />}
+              </li>
+            ))}
+            <li className="dropdown" onClick={() => toggleDropdown("categories")}>
+              <Link to="#">Categories
+                <svg
+                  className={`arrow ${openDropdown === "categories" ? "open" : ""}`}
+                  width="12"
+                  height="8"
+                  viewBox="0 0 12 8"
+                  style={{ marginLeft: '10px' }} 
+                >
+                  <path d="M0 0l6 8 6-8H0z" fill="white" />
+                </svg>
+              </Link>
+              {openDropdown === "categories" && (
+                <ul className="dropdown-menu">
+                  <li><Link to="/mens">Mens</Link></li>
+                  <li><Link to="/womens">Womens</Link></li>
+                  <li><Link to="/kids">Kids</Link></li>
+                </ul>
+              )}
+            </li>
+
+          </ul>
+
+          <div className="nav-login-cart">
+                <Link to="/cart" className="cart-button">
+                    <button className="cart-icon-button">
+                        <img src={cart_icon} alt="Cart" />
+                    </button>
+                </Link>
+                <div className="nav-cart-count">{getTotalCartItems()}</div>
             </div>
 
-            <ul className={`nav-menu`}>
-                <li onClick={() => handleMenuItemClick("shop")}>
-                    <Link to="/">Shop</Link>
-                    {menu === "shop" && <hr />}
-                </li>
-                <li onClick={() => handleMenuItemClick("about")}>
-                    <Link to="/about">About</Link>
-                    {menu === "about" && <hr />}
-                </li>
-                <li onClick={() => handleMenuItemClick("contact")}>
-                    <Link to="/contact">Contact</Link>
-                    {menu === "contact" && <hr />}
-                </li>
-                <li className="dropdown" onClick={() => toggleDropdown("categories")}>
-                    <Link to="#">Categories
-                        <svg
-                            className={`arrow ${openDropdown === "categories" ? "open" : ""}`}
-                            width="12"
-                            height="8"
-                            viewBox="0 0 12 8"
-                        >
-                            <path d="M0 0l6 8 6-8H0z" fill="white" />
-                        </svg>
-                    </Link>
-                    {openDropdown === "categories" && (
-                        <ul className="dropdown-menu">
-                            <li><Link to="/mens">Mens</Link></li>
-                            <li><Link to="/womens">Womens</Link></li>
-                            <li><Link to="/kids">Kids</Link></li>
-                        </ul>
-                    )}
-                </li>
-            </ul>
 
         </ul>
       </nav>
@@ -104,7 +107,7 @@ const Navbar = () => {
       {/* Toggle Button */}
       <button
         className="toggle-btn"
-        style={{ top: expanded ? '175px' : '10px' }}
+        style={{ top: expanded ? '125px' : '10px' }}
         onClick={toggleSidebar}
       >
         <span id="arrow-icon">{expanded ? '▲' : '▼'}</span>
