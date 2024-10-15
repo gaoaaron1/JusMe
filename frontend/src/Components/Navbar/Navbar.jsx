@@ -59,11 +59,10 @@ const Navbar = () => {
         <ul className="nav-grid">
 
 
-
-        <div className="nav-logo">
+            <div className="nav-logo">
                     <img src={logo} alt="Logo" />
                     <p>JUSME</p>
-                </div>
+            </div>
 
             <ul className={`nav-menu`}>
                 <li onClick={() => handleMenuItemClick("shop")}>

@@ -1,67 +1,22 @@
-/* Sidebar2 Container */
-.sidebar2-container {
-  position: relative;
-  width: 100vw;
-  height: 100vh;
-}
+/* Add this to your Sidebar2.css file */
 
-/* Top Vertical Sidebar */
-#sidebar2 {
-  height: 0;
-  width: 100%;
-  overflow-y: hidden;
-  position: fixed;
-  top: 0;
-  left: 0;
-  background-color: #fff;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  transition: height 0.5s ease;
-  z-index: 999;
-}
-
-#sidebar2.expanded {
-  height: 150px; /* Expand to desired height */
-}
-
-/* Grid Layout for Menu Items */
-.nav-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); /* Auto-fit columns */
-  gap: 20px; /* Add space between items */
-  padding: 30px;
-  margin: 0;
-  list-style: none;
-  justify-items: center; /* Center items horizontally */
-}
-
-/* Nav Items */
-.nav-item {
-  text-align: center;
-}
-
-.nav-link {
-  opacity: 0;
-  font-size: 18px;
-  color: black;
-  text-decoration: none;
-  transition: opacity 0.5s ease;
-}
-
-/* Make links visible when expanded */
-#sidebar2.expanded .nav-link {
-  opacity: 1;
-}
-
-/* Toggle Button Styles */
-.toggle-btn {
-  position: fixed;
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 1000;
-  border: none;
-  background: none;
-  cursor: pointer;
-  font-size: 24px;
-  transition: top 0.5s ease;
-  line-height: 0; /* Reduce vertical space within the button */
-}
+/* Dropdown Styles */
+.dropdown {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column; /* Stack items vertically */
+  }
+  
+  .dropdown-link {
+    padding: 10px 15px; /* Padding for dropdown links */
+    text-decoration: none;
+    color: black; /* Link color */
+    transition: background-color 0.3s; /* Transition effect */
+  }
+  
+  .dropdown-link:hover {
+    background-color: #f0f0f0; /* Highlight effect on hover */
+  }
+  

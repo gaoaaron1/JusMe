@@ -5,16 +5,25 @@
     height: 0vh;
   }
 
-  /* Button Styles for Nav Items */
+/* Nav Menu */
 .nav-menu {
-    display: flex;
+    display: flex; /* Keep items in a row */
     align-items: center;
     list-style: none;
-    gap: 20px; /* Adjust gap between buttons */
+    gap: 15px; /* Adjust gap between menu items */
     color: white; /* Change text color to white */
     font-size: 20px;
     font-weight: 500;
-    transition: max-height 0.3s ease-in-out;
+    margin: 0; /* Remove default margin */
+    padding: 0; /* Remove default padding */
+}
+
+
+
+.nav-menu li a:hover {
+    background: rgba(255, 255, 255, 0.2); /* Background color on hover */
+    border: 2px solid #FF4141; /* Border color on hover */
+    transform: scale(1.1); /* Slightly enlarge the button on hover */
 }
 
   
@@ -26,7 +35,7 @@
     position: fixed;
     top: 0;
     left: 0;
-    background-color: rgba(255, 255, 255, 0.5);
+    background-color: rgba(255, 255, 255, 1);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     transition: height 0.5s ease;
     z-index: 999;
@@ -64,7 +73,25 @@
   #sidebar2.expanded .nav-link {
     opacity: 1;
   }
-  
+
+  .nav-logo {
+    display: flex; /* Flex layout for logo */
+    align-items: center; /* Center items vertically */
+    margin: 10px 0; /* Adjust margin to reduce space */
+}
+
+/* Image and text styles within the logo */
+.nav-logo img {
+    height: 50px; /* Set a height for logo image */
+    margin-right: 10px; /* Space between logo and text */
+}
+
+.nav-logo p {
+    color: black; /* Change text color to white */
+    font-size: 25px;
+    font-weight: 600;
+}
+
   /* Toggle Button Styles */
   .toggle-btn {
     position: fixed;

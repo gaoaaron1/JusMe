@@ -4,6 +4,7 @@ import './Sidebar2.css'; // Import CSS
 const Sidebar2 = () => {
   const [expanded, setExpanded] = useState(true); // Manage sidebar state
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768); 
+  const [dropdownOpen, setDropdownOpen] = useState(false); // State for dropdown menu
 
   const toggleSidebar = () => {
     setExpanded(!expanded);
@@ -21,6 +22,10 @@ const Sidebar2 = () => {
     }
   };
 
+  const toggleDropdown = () => {
+    setDropdownOpen(!dropdownOpen); // Toggle the dropdown menu
+  };
+
   return (
     <div className="sidebar2-container">
       {/* Top Vertical Sidebar */}
@@ -34,10 +39,23 @@ const Sidebar2 = () => {
               <a
                 className="nav-link"
                 href="#"
-                onClick={() => scrollToElement(`heading${index + 1}`)}
+                onClick={() => {
+                  if (item === 'Item 2') {
+                    toggleDropdown(); // Toggle dropdown for Item 2
+                  } else {
+                    scrollToElement(`heading${index + 1}`);
+                  }
+                }}
               >
                 {item}
               </a>
+              {item === 'Item 2' && dropdownOpen && (
+                <ul className="dropdown">
+                  <li><a className="dropdown-link" href="#" onClick={() => scrollToElement('subheading1')}>Sub Item 1</a></li>
+                  <li><a className="dropdown-link" href="#" onClick={() => scrollToElement('subheading2')}>Sub Item 2</a></li>
+                  <li><a className="dropdown-link" href="#" onClick={() => scrollToElement('subheading3')}>Sub Item 3</a></li>
+                </ul>
+              )}
             </li>
           ))}
         </ul>
