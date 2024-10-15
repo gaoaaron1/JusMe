@@ -62,6 +62,7 @@ const Navbar = () => {
         </div>
 
           <ul className={`nav-menu`}>
+            
             {menuItems.map((item) => (
               <li key={item.name} onClick={() => handleMenuItemClick(item.name)}>
                 <Link to={item.path}>{item.name}</Link>
@@ -77,14 +78,26 @@ const Navbar = () => {
                   viewBox="0 0 12 8"
                   style={{ marginLeft: '10px' }} 
                 >
-                  <path d="M0 0l6 8 6-8H0z" fill="white" />
+                  <path d="M0 0l6 8 6-8H0z" fill="black" />
                 </svg>
               </Link>
               {openDropdown === "categories" && (
                 <ul className="dropdown-menu">
-                  <li><Link to="/mens">Mens</Link></li>
-                  <li><Link to="/womens">Womens</Link></li>
-                  <li><Link to="/kids">Kids</Link></li>
+                  <li>
+                    <Link to="/mens">
+                      <button className="category-button">Mens</button>
+                    </Link>
+                  </li>
+                  <li>
+                    <Link to="/womens">
+                      <button className="category-button">Womens</button>
+                    </Link>
+                  </li>
+                  <li>
+                    <Link to="/kids">
+                      <button className="category-button">Kids</button>
+                    </Link>
+                  </li>
                 </ul>
               )}
             </li>

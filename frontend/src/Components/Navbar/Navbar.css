@@ -5,29 +5,38 @@
     height: auto;
   }
   
+/* Hide nav items when sidebar is collapsed */
+
 /* Button Styles for Nav Items */
 .nav-menu {
     display: flex;
     align-items: center;
     list-style: none;
     gap: 50px; /* Adjust gap between buttons */
-    color: white; /* Change text color to white */
+    color: rgb(14, 12, 12); /* Change text color to white */
     font-size: 20px;
+    opacity: 0; /* Default opacity */
     font-weight: 500;
     transition: max-height 0.3s ease-in-out;
+}
+
+.sidebar2.expanded .nav-menu {
+    opacity: 1; /* Make visible when expanded */
+    height: auto; /* Allow height to adjust */
 }
   
   .nav-menu li a {
     text-decoration: none; /* Remove underline from links */
-    color: white; /* Default link color */
+    color: rgb(12, 11, 11); /* Default link color */
   }
   
   .nav-menu li a:hover {
     background: rgba(255, 255, 255, 0.2); /* Background color on hover */
     border: 2px solid #FF4141; /* Border color on hover */
+    border-radius: 12px; /* Rounded corners */
     transform: scale(1.1); /* Slightly enlarge the button on hover */
-    transition: transform 0.3s ease; /* Smooth transition for scale effect */
-  }
+    transition: transform 0.3s ease, border-radius 0.3s ease; /* Smooth transition */
+}
   
   /* Top Vertical Sidebar */
   #sidebar2 {
@@ -37,10 +46,12 @@
     position: fixed;
     top: 0;
     left: 0;
-    background-color: rgba(0, 0, 0, 0.7); /* Translucent black background */
+    background-color: rgba(252, 251, 251, 0.7); /* Translucent black background */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Enhanced shadow */
     transition: height 0.5s ease;
+    backdrop-filter: blur(10px);
     z-index: 999;
+        transition: height 1s ease, opacity 1s ease; /* Adjust duration here */
   }
   
   #sidebar2.expanded {
@@ -56,8 +67,8 @@
     height: 100%; /* Full height to fill the sidebar */
     padding: 0 100px; /* Add padding for sides */
     margin-left: 20px; /* Add margin to the left for spacing */
+    transition: opacity 0.3s ease; /* Smooth transition for visibility */
   }
-  
 
   
   /* Nav Items */
@@ -79,7 +90,7 @@
   }
   
   .nav-logo p {
-    color: white; /* Change text color to white */
+    color: rgb(12, 12, 12); /* Change text color to white */
     font-size: 25px;
     font-weight: 600;
   }
@@ -129,9 +140,10 @@
   
   .dropdown-menu {
     position: absolute;
+    list-style: none;
     top: 100%; /* Aligns the menu right below the parent item */
     left: 0;
-    background-color: rgba(0, 0, 0, 0.9); /* Black translucent background for dropdown */
+    background-color: rgba(230, 227, 227, 0.9); /* Black translucent background for dropdown */
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
     border-radius: 8px;
     padding: 10px 0;
@@ -140,6 +152,25 @@
     gap: 10px;
     min-width: 150px;
     z-index: 1000;
+  }
+  
+  /* Dropdown Menu Buttons */
+.category-button {
+    width: 100%; /* Full width of the dropdown item */
+    padding: 10px;
+    background-color: white;
+    border: 2px solid transparent;
+    border-radius: 8px;
+    font-size: 18px;
+    font-weight: 500;
+    color: black;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  
+  .category-button:hover {
+    background-color: rgba(255, 65, 65, 0.2); /* Light red hover effect */
+/* Slight zoom on hover */
   }
   
 
@@ -151,12 +182,12 @@
 }
 
 .nav-login-cart button {
-    width: 100px;
+    width: 125px;
     height: 58px;
     outline: none;
-    border: 1px solid #fff; /* White border */
+    border: 1px solid #231f1f; /* White border */
     border-radius: 75px;
-    color: white; /* Change text color to white */
+    color: rgb(8, 8, 8); /* Change text color to white */
     font-size: 20px;
     font-weight: 500;
     background: white; /* Transparent background */
@@ -165,7 +196,11 @@
 }
 
 .nav-login-cart button:hover {
-    background: rgba(255, 255, 255, 0.615); /* Button hover effect */
+    background: rgba(255, 255, 255, 0.2); /* Background color on hover */
+    border: 2px solid #FF4141; /* Border color on hover */
+    border-radius: 12px; /* Rounded corners */
+    transform: scale(1.1); /* Slightly enlarge the button on hover */
+
 }
 
 /* Shopping cart button */
@@ -182,3 +217,24 @@
     background: red;
     color: white;
 }
+
+/* Hide logo and cart when sidebar is collapsed */
+#sidebar2:not(.expanded) .nav-logo,
+#sidebar2:not(.expanded) .nav-login-cart {
+  opacity: 0; /* Make them invisible */
+  height: 0; /* Remove height to collapse them completely */
+  padding: 0; /* Remove padding */
+  margin: 0; /* Remove margin */
+  overflow: hidden; /* Prevent any overflow */
+  transition: opacity 0.3s ease, height 0.3s ease; /* Smooth transition */
+}
+
+/* Show logo and cart when sidebar is expanded */
+#sidebar2.expanded .nav-logo,
+#sidebar2.expanded .nav-login-cart {
+  opacity: 1; /* Make them visible */
+  height: auto; /* Allow height to adjust */
+  padding: 10px 0; /* Restore padding */
+  margin: 10px 0; /* Restore margin */
+}
+
