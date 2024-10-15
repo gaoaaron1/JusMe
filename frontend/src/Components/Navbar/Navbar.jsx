@@ -13,6 +13,7 @@ const Navbar = () => {
   const [expanded, setExpanded] = useState(true); // Manage sidebar state
   const [openDropdown, setOpenDropdown] = useState(null); // State for dropdown
 
+  
   //======================== DECLARATIVE ========================//
 
   const toggleSidebar = () => {
