@@ -1,73 +1,119 @@
 import React, { useContext, useState } from 'react';
-import './Navbar.css';
+import './Navbar.css'; // Import CSS
 import logo from '../Assets/logo.png';
 import cart_icon from '../Assets/cart_icon.png';
 import { Link } from 'react-router-dom';
 import { ShopContext } from '../../Context/ShopContext';
 
 const Navbar = () => {
-    const [menu, setMenu] = useState("shop");
-    const { getTotalCartItems } = useContext(ShopContext);
-    const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  //======================== USE STATES ========================//
 
-    const toggleMobileMenu = () => {
-        setIsMobileMenuOpen(!isMobileMenuOpen); // Toggle the mobile menu
-    };
+  const [menu, setMenu] = useState("shop");
+  const { getTotalCartItems } = useContext(ShopContext);
+  const [expanded, setExpanded] = useState(true); // Manage sidebar state
+  const [openDropdown, setOpenDropdown] = useState(null); // State for dropdown
 
-    // Function to close mobile menu after clicking a menu item
-    const handleMenuItemClick = (menuItem) => {
-        setMenu(menuItem);       // Set the current menu item
-        setIsMobileMenuOpen(false); // Close the mobile menu
-    };
+  //======================== DECLARATIVE ========================//
 
-    return (
-        <div className="navbar">
-            <div className="nav-logo">
-                <img src={logo} alt="" />
-                <p>JUSME</p>
-            </div>
+  const toggleSidebar = () => {
+    setExpanded(!expanded);
+  };
 
-            {/* Hamburger Icon for mobile */}
-            <div className="hamburger" onClick={toggleMobileMenu}>
-                <span className="line"></span>
-                <span className="line"></span>
-                <span className="line"></span>
-            </div>
+  const toggleDropdown = (menu) => {
+    setOpenDropdown(openDropdown === menu ? null : menu);
+  };
 
-            {/* Menu items */}
-            <ul className={`nav-menu ${isMobileMenuOpen ? "open" : ""}`}>
-                <li onClick={() => handleMenuItemClick("shop")}>
-                    <Link style={{ textDecoration: 'none' }} to='/'>Shop</Link>
-                    {menu === "shop" && <hr />}
-                </li>
-                <li onClick={() => handleMenuItemClick("mens")}>
-                    <Link style={{ textDecoration: 'none' }} to='/mens'>Mens</Link>
-                    {menu === "mens" && <hr />}
-                </li>
-                <li onClick={() => handleMenuItemClick("womens")}>
-                    <Link style={{ textDecoration: 'none' }} to='/womens'>Womens</Link>
-                    {menu === "womens" && <hr />}
-                </li>
-                <li onClick={() => handleMenuItemClick("kids")}>
-                    <Link style={{ textDecoration: 'none' }} to='/kids'>Kids</Link>
-                    {menu === "kids" && <hr />}
-                </li>
+  const handleMenuItemClick = (menuItem) => {
+    setMenu(menuItem);
+  };
 
-                
-            </ul>
+  const scrollToElement = (targetId, offset = 50) => {
+    const targetElement = document.getElementById(targetId);
+    if (targetElement) {
+      const offsetPosition = targetElement.offsetTop - offset;
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth',
+      });
+      setExpanded(false); // Collapse sidebar after navigation
+    }
+  };
 
-            {/* Cart and Login */}
-            <div className="nav-login-cart">
-                <Link to="/login">
-                    <button>Login</button>
-                </Link>
-                <Link to="/cart">
-                    <img src={cart_icon} alt="" />
+  // Menu items from Navbar
+  const menuItems = [
+    { name: "Shop", path: "/" },
+    { name: "About", path: "/about" },
+    { name: "Contact", path: "/contact" },
+  ];
+
+  return (
+    <div className="sidebar2-container">
+      {/* Top Vertical Sidebar */}
+      <nav
+        id="sidebar2"
+        className={`sidebar2 ${expanded ? 'expanded' : ''}`}
+      >
+        <ul className="nav-grid">
+          
+
+        <div className="nav-logo">
+                    <img src={logo} alt="Logo" />
+                    <p>JUSME</p>
+        </div>
+
+          <ul className={`nav-menu`}>
+            {menuItems.map((item) => (
+              <li key={item.name} onClick={() => handleMenuItemClick(item.name)}>
+                <Link to={item.path}>{item.name}</Link>
+                {menu === item.name && <hr />}
+              </li>
+            ))}
+            <li className="dropdown" onClick={() => toggleDropdown("categories")}>
+              <Link to="#">Categories
+                <svg
+                  className={`arrow ${openDropdown === "categories" ? "open" : ""}`}
+                  width="12"
+                  height="8"
+                  viewBox="0 0 12 8"
+                  style={{ marginLeft: '10px' }} 
+                >
+                  <path d="M0 0l6 8 6-8H0z" fill="white" />
+                </svg>
+              </Link>
+              {openDropdown === "categories" && (
+                <ul className="dropdown-menu">
+                  <li><Link to="/mens">Mens</Link></li>
+                  <li><Link to="/womens">Womens</Link></li>
+                  <li><Link to="/kids">Kids</Link></li>
+                </ul>
+              )}
+            </li>
+
+          </ul>
+
+          <div className="nav-login-cart">
+                <Link to="/cart" className="cart-button">
+                    <button className="cart-icon-button">
+                        <img src={cart_icon} alt="Cart" />
+                    </button>
                 </Link>
                 <div className="nav-cart-count">{getTotalCartItems()}</div>
             </div>
-        </div>
-    );
+
+
+        </ul>
+      </nav>
+
+      {/* Toggle Button */}
+      <button
+        className="toggle-btn"
+        style={{ top: expanded ? '125px' : '10px' }}
+        onClick={toggleSidebar}
+      >
+        <span id="arrow-icon">{expanded ? '▲' : '▼'}</span>
+      </button>
+    </div>
+  );
 };
 
 export default Navbar;

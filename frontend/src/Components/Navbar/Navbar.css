@@ -1,49 +1,149 @@
-.navbar {
-    display: flex;
-    justify-content: space-around;
-    padding: 16px;
-    box-shadow: 0 1px 3px -2px black;
-}
-
-.nav-logo {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
-.nav-logo p {
-    color: #171717;
-    font-size: 38px;
-    font-weight: 600;
-}
-
+/* Sidebar2 Container */
+.sidebar2-container {
+    position: relative;
+    width: 100vw;
+    height: auto;
+  }
+  
+/* Button Styles for Nav Items */
 .nav-menu {
     display: flex;
     align-items: center;
     list-style: none;
-    gap: 50px;
-    color: #626262;
+    gap: 50px; /* Adjust gap between buttons */
+    color: white; /* Change text color to white */
     font-size: 20px;
     font-weight: 500;
+    transition: max-height 0.3s ease-in-out;
 }
+  
+  .nav-menu li a {
+    text-decoration: none; /* Remove underline from links */
+    color: white; /* Default link color */
+  }
+  
+  .nav-menu li a:hover {
+    background: rgba(255, 255, 255, 0.2); /* Background color on hover */
+    border: 2px solid #FF4141; /* Border color on hover */
+    transform: scale(1.1); /* Slightly enlarge the button on hover */
+    transition: transform 0.3s ease; /* Smooth transition for scale effect */
+  }
+  
+  /* Top Vertical Sidebar */
+  #sidebar2 {
+    height: 0;
+    width: 100%;
+    overflow: visible;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.7); /* Translucent black background */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Enhanced shadow */
+    transition: height 0.5s ease;
+    z-index: 999;
+  }
+  
+  #sidebar2.expanded {
+    height: 100px; /* Expand to desired height */
+  }
+  
+/* Adjust the nav-grid position */
+.nav-grid {
+    display: flex; /* Use flex layout for horizontal spacing */
+    flex-direction: row; /* Arrange items in a row */
+    align-items: center; /* Center items vertically */
+    justify-content: space-between; /* Evenly space items horizontally */
+    height: 100%; /* Full height to fill the sidebar */
+    padding: 0 100px; /* Add padding for sides */
+    margin-left: 20px; /* Add margin to the left for spacing */
+  }
+  
 
-.nav-menu li {
+  
+  /* Nav Items */
+  .nav-item {
+    text-align: center;
+  }
+  
+  /* Logo Styles */
+  .nav-logo {
+    display: flex; /* Flex layout for logo */
+    align-items: center; /* Center items vertically */
+    margin: 10px 0; /* Adjust margin to reduce space */
+  }
+  
+  /* Image and text styles within the logo */
+  .nav-logo img {
+    height: 50px; /* Set a height for logo image */
+    margin-right: 10px; /* Space between logo and text */
+  }
+  
+  .nav-logo p {
+    color: white; /* Change text color to white */
+    font-size: 25px;
+    font-weight: 600;
+  }
+  
+  /* Toggle Button Styles */
+  .toggle-btn {
+    position: fixed;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1000;
+    border: none;
+    background: rgba(255, 255, 255, 0.1); /* Slightly translucent background */
+    border-radius: 20px; /* Rounded corners */
+    cursor: pointer;
+    font-size: 24px;
+    transition: top 0.5s ease, background 0.3s ease; /* Smooth transition for button */
+    padding: 10px 15px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  }
+  
+  /* Add speech bubble tail */
+  .toggle-btn::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-left: 10px solid transparent; /* Tail to the left */
+    border-right: 10px solid transparent;
+    border-bottom: 10px solid rgba(255, 255, 255, 0.1); /* Same as button background */
+    top: 50%;
+    left: -10px; /* Position the tail */
+    transform: translateY(-50%); /* Center the tail vertically */
+  }
+  
+  /* Adjust toggle button position for when sidebar is collapsed */
+  .sidebar2-container .toggle-btn:not(.expanded) {
+    top: 10px; /* Position the button at the top when collapsed */
+  }
+  
+  /* Dropdown Menu Styles */
+  .dropdown {
+    position: relative;
+    cursor: pointer; /* Show pointer on hover */
+    display: flex; /* Ensure elements are aligned correctly */
+    align-items: center; /* Align arrow with text */
+  }
+  
+  .dropdown-menu {
+    position: absolute;
+    top: 100%; /* Aligns the menu right below the parent item */
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.9); /* Black translucent background for dropdown */
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    padding: 10px 0;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 3px;
-    cursor: pointer;
-}
+    gap: 10px;
+    min-width: 150px;
+    z-index: 1000;
+  }
+  
 
-.nav-menu hr {
-    border: none;
-    width: 80%;
-    height: 3px;    
-    border-radius: 10px;
-    background: #FF4141;
-}
-
+  /* Login and Cart Section */
 .nav-login-cart {
     display: flex;
     align-items: center;
@@ -51,24 +151,24 @@
 }
 
 .nav-login-cart button {
-    width: 157px;
+    width: 100px;
     height: 58px;
     outline: none;
-    border: 1xp solid #7a7a7a;
+    border: 1px solid #fff; /* White border */
     border-radius: 75px;
-    color: #515151;
+    color: white; /* Change text color to white */
     font-size: 20px;
     font-weight: 500;
-    background: white;
+    background: white; /* Transparent background */
     cursor: pointer;
+    transition: background 0.3s ease; /* Button hover transition */
 }
 
-/* Shopping cart button*/
-.nav-login-cart button:active {
-    background: #f3f3f3;
+.nav-login-cart button:hover {
+    background: rgba(255, 255, 255, 0.615); /* Button hover effect */
 }
 
-/*Count next to shopping cart*/
+/* Shopping cart button */
 .nav-cart-count {
     width: 22px;
     height: 22px;
@@ -81,126 +181,4 @@
     font-size: 14px;
     background: red;
     color: white;
-}
-
-/* Hamburger Menu Icon - initially hidden */
-.hamburger {
-    display: none;
-    flex-direction: column;
-    justify-content: space-between;
-    width: 30px;
-    height: 21px;
-    cursor: pointer;
-}
-
-.hamburger .line {
-    width: 100%;
-    height: 3px;
-    background-color: #000;
-    border-radius: 2px;
-}
-
-/* Navigation Menu */
-.nav-menu {
-    display: flex;
-    align-items: center;
-    list-style: none;
-    gap: 50px;
-    color: #626262;
-    font-size: 20px;
-    font-weight: 500;
-}
-
-.nav-menu li {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 3px;
-    cursor: pointer;
-}
-
-.nav-menu hr {
-    border: none;
-    width: 80%;
-    height: 3px;
-    border-radius: 10px;
-    background: #FF4141;
-}
-
-/* Login and Cart Section */
-.nav-login-cart {
-    display: flex;
-    align-items: center;
-    gap: 45px;
-}
-
-/* Shopping Cart Count */
-.nav-cart-count {
-    width: 22px;
-    height: 22px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: -35px;
-    margin-left: -55px;
-    border-radius: 11px;
-    font-size: 14px;
-    background: red;
-    color: white;
-}
-
-/* Media Queries for Hamburger Menu */
-
-/* Mobile Screens (max-width: 768px) */
-@media (max-width: 768px) {
-    .navbar {
-        padding: 16px 20px;
-    }
-
-    .nav-menu {
-        position: absolute;
-        top: 70px; /* Adjust based on your navbar height */
-        right: 0;
-        flex-direction: column;
-        background-color: white;
-        gap: 20px;
-        padding: 20px;
-        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-        width: 100%;
-        height: 100vh;
-        transform: translateY(-100%);
-        transition: transform 0.3s ease-in-out;
-        display: none; /* Hidden initially */
-    }
-
-    .nav-menu.open {
-        display: flex; /* Show menu when open */
-        transform: translateY(0); /* Slide the menu down */
-    }
-
-    .nav-menu li {
-        font-size: 20px;
-    }
-
-    .nav-login-cart {
-        display: none; /* Hide login and cart on mobile menu */
-    }
-
-    /* Hamburger Icon Visibility */
-    .hamburger {
-        display: flex; /* Show hamburger icon on mobile screens */
-        padding: 30px;
-    }
-}
-
-/* Small Mobile Screens (max-width: 480px) */
-@media (max-width: 480px) {
-    .nav-logo p {
-        font-size: 24px;
-    }
-
-    .nav-menu li {
-        font-size: 18px;
-    }
 }
