@@ -1,11 +1,11 @@
-import React from 'react'
-import './Item.css'
-import { Link } from 'react-router-dom'
+import React from 'react';
+import './Item.css';
+import { Link } from 'react-router-dom';
 
 const Item = (props) => {
     return (
-        <div className='item'>
-            <Link to={`/product/${props.id}`}><img onClick={window.scrollTo(0, 0)} src={props.image} alt="" /></Link>
+        <div className='item-card'>
+            <Link to={`/product/${props.id}`}><img onClick={window.scrollTo(0, 0)} src={props.image} alt={props.name} /></Link>
             <p>{props.name}</p>
             <div className="item-prices">
                 <div className="item-price-new">
@@ -16,7 +16,7 @@ const Item = (props) => {
                 </div>
             </div>
         </div>
-    )
+    );
 }
 
-export default Item
+export default Item;
