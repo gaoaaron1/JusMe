@@ -1,3 +1,36 @@
+/* Sort Dropdown Styles */
+.shopcategory-sort {
+    display: flex;
+    align-items: center;
+    padding: 10px 20px;
+    border-radius: 20px;
+    border: 1px solid #888;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.shopcategory-sort:hover {
+    background-color: #f0f0f0;
+}
+
+.sort-dropdown {
+    margin-left: 10px;          /* Space between text and dropdown */
+    border: none;               /* Remove default border */
+    background-color: transparent; /* Match background */
+    font-size: 16px;           /* Match font size */
+    color: #444;               /* Font color */
+    cursor: pointer;           /* Pointer cursor */
+    outline: none;             /* Remove outline */
+}
+
+.sort-dropdown:focus {
+    outline: none;             /* Remove focus outline */
+}
+
+.shopcategory-sort img {
+    margin-left: 8px;          /* Space between dropdown and icon */
+}
+
 /* Main Container for Shop Category */
 .shop-category {
     width: 1200px;                  /* Set a fixed width */
@@ -31,24 +64,6 @@
 .shopcategory-indexSort p span {
     font-weight: 600;
     color: #222;
-}
-
-.shopcategory-sort {
-    padding: 10px 20px;
-    border-radius: 20px;
-    border: 1px solid #888;
-    display: flex;
-    align-items: center;
-    cursor: pointer;
-    transition: background-color 0.3s;
-}
-
-.shopcategory-sort:hover {
-    background-color: #f0f0f0;
-}
-
-.shopcategory-sort img {
-    margin-left: 8px;
 }
 
 /* Products Grid */
@@ -111,27 +126,6 @@
 
     .shopcategory-banner {
         width: 100%;
-        max-height: 200px;
-    }
-}
-
-
-/* Responsive Design */
-@media (max-width: 768px) {
-    .shopcategory-indexSort {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 10px;
-        padding: 0 20px;
-    }
-
-    .shopcategory-products {
-        grid-template-columns: 1fr; /* One product per row */
-        gap: 30px; /* Space between products */
-    }
-
-    .shopcategory-banner {
-        width: 90%;
         max-height: 200px;
     }
 }
