@@ -1,9 +1,13 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Sidebar from '../UI/Sidebar/Sidebar';
 import './CSS/About.css'; // Import CSS for styles
 import AboutImage from '../Components/Assets/About.jpg'; // Import the image
 
 const About = () => {
+    // Scroll to the top when the component is mounted
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, []); // Empty dependency array to ensure it runs only once on mount
     return (
         <div className="about-wrapper">
             {/* Sidebar Component */}
