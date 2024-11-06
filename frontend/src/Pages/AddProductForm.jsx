@@ -1,4 +1,6 @@
+// AddProductForm.jsx
 import React, { useState } from 'react';
+import './CSS/AddProductForm.css'; // Import the CSS file
 
 const AddProductForm = ({ onAddProduct, onClose }) => {
     const [name, setName] = useState('');
@@ -39,7 +41,7 @@ const AddProductForm = ({ onAddProduct, onClose }) => {
     };
 
     return (
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} className="add-product-form">
             <input
                 type="text"
                 placeholder="Product Name"
@@ -82,12 +84,11 @@ const AddProductForm = ({ onAddProduct, onClose }) => {
             <button type="submit">Add Product</button>
             {/* Optional: Display uploaded image preview with specific size */}
             {image && (
-                <div style={{ marginTop: '10px' }}>
+                <div className="image-preview">
                     <h3>Image Preview:</h3>
                     <img 
                         src={image} 
                         alt="Uploaded" 
-                        style={{ width: '100px', height: '100px', objectFit: 'cover' }} // Set dimensions and style
                     />
                 </div>
             )}

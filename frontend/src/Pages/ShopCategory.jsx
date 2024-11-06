@@ -1,16 +1,16 @@
 import React, { useContext, useState } from 'react';
 import './CSS/ShopCategory.css';
 import { ShopContext } from '../Context/ShopContext';
+import { useNavigate } from 'react-router-dom'; // Import the useNavigate hook
 import dropdown_icon from '../Components/Assets/dropdown_icon.png';
 import Item from '../Components/Item/Item';
-import AddProductForm from './AddProductForm';
 
 const ShopCategory = (props) => {
     const { all_product, addProduct } = useContext(ShopContext);
     const [currentPage, setCurrentPage] = useState(1);
-    const [showForm, setShowForm] = useState(false);
     const [sortOrder, setSortOrder] = useState('oldest');
     const itemsPerPage = 9;
+    const navigate = useNavigate(); // Initialize useNavigate hook for navigation
 
     const filteredProducts = all_product.filter(
         (item) => item.category === props.category
@@ -34,13 +34,18 @@ const ShopCategory = (props) => {
         indexOfLastProduct
     );
 
+    // Handle navigation to the Add Product page
+    const goToAddProductPage = () => {
+        navigate('/admin/import'); // Redirect to the AddProductPage
+    };
+
     return (
         <div className='shop-category'>
             <img className='shopcategory-banner' src={props.banner} alt="" />
             <div className="shopcategory-indexSort">
                 <p>
                     <span>
-                        Showing {indexOfFirstProduct + 1}-
+                        Showing {indexOfFirstProduct + 1}- 
                         {Math.min(indexOfLastProduct, sortedProducts.length)}
                     </span>{' '}
                     out of {sortedProducts.length} products
@@ -59,19 +64,10 @@ const ShopCategory = (props) => {
                 </div>
             </div>
 
-            <button onClick={() => setShowForm(!showForm)}>
-                {showForm ? 'Close Form' : 'Add New Product'}
+            {/* Button to navigate to the AddProductPage */}
+            <button onClick={goToAddProductPage}>
+                Add New Product
             </button>
-
-            {showForm && (
-                <AddProductForm 
-                    onAddProduct={(newProduct) => {
-                        addProduct(newProduct); 
-                        setShowForm(false); 
-                    }} 
-                    onClose={() => setShowForm(false)} 
-                />
-            )}
 
             <div className="shopcategory-products">
                 {currentProducts.map((item, i) => (
