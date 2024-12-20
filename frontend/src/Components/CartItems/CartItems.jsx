@@ -5,15 +5,31 @@ import remove_icon from '../Assets/cart_cross_icon.png';
 import Transaction from '../../Pages/Transaction';
 
 const CartItems = () => {
+    
+    //================ Use States ======================//
     const { getTotalCartAmount, all_product, cartItems, removeFromCart, updateCartItemQuantity } = useContext(ShopContext);
     const [showModal, setShowModal] = useState(false); // State to show/hide modal
+    const [showEmptyCartModal, setShowEmptyCartModal] = useState(false);
 
+    //================ Event Handlers ======================//
     const handleQuantityChange = (e, id) => {
         const value = parseInt(e.target.value);
         if (value >= 0) {
             updateCartItemQuantity(id, value);
         }
     };
+
+    // Function to handle the checkout process
+    const handleCheckout = () => {
+        const hasItemsInCart = Object.values(cartItems).some(quantity => quantity > 0);
+        if (hasItemsInCart) {
+            setShowModal(true); // Show checkout modal if items are in the cart
+        } else {
+            setShowEmptyCartModal(true); // Show empty cart alert if no items in cart
+        }
+    };
+
+
 
     return (
         <div className="cartitems">
@@ -66,6 +82,17 @@ const CartItems = () => {
                 </div>
             )}
 
+
+            {/* Empty Cart Alert Modal */}
+            {showEmptyCartModal && (
+                <div className="modal-overlay">
+                    <div className="modal-content">
+                        <button className="close-modal" onClick={() => setShowEmptyCartModal(false)}>X</button>
+                        <p>Your cart is empty. Add at least one item to proceed to checkout.</p>
+                    </div>
+                </div>
+            )}
+
             <div className="cartitems-down">
                 <div className="cartitems-total">
                     <h1>Cart Totals</h1>
@@ -85,7 +112,7 @@ const CartItems = () => {
                             <h3>${getTotalCartAmount()}</h3>
                         </div>
                     </div>
-                    <button onClick={() => setShowModal(true)}>PROCEED TO CHECKOUT</button> {/* Trigger modal */}
+                    <button onClick={handleCheckout}>PROCEED TO CHECKOUT</button>
                 </div>
                 <div className="cartitems-promocode">
                     <p>If you have a promo code, Enter it here</p>
