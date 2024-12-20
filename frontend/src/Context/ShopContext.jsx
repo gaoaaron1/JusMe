@@ -30,8 +30,15 @@ const ShopContextProvider = (props) => {
     };
 
     const addProduct = (newProduct) => {
+        // Add the new product to the products state
         const productWithId = { ...newProduct, id: products.length + 1 }; // Ensure each new product gets a unique ID
         setProducts((prev) => [...prev, productWithId]);
+
+        // Initialize the cart for this new product with quantity 0
+        setCartItems((prev) => ({
+            ...prev,
+            [productWithId.id]: 0, // Set the new product's quantity to 0
+        }));
     }
 
     const getTotalCartAmount = () => {
