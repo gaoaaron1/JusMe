@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import './CSS/ShopCategory.css';
 import { ShopContext } from '../Context/ShopContext';
 import { useNavigate } from 'react-router-dom'; // Import the useNavigate hook
@@ -9,6 +9,15 @@ const ShopCategory = (props) => {
     const { all_product, addProduct } = useContext(ShopContext);
     const [currentPage, setCurrentPage] = useState(1);
     const [sortOrder, setSortOrder] = useState('oldest');
+    const [categoryProducts, setCategoryProducts] = useState([]); // State for category-based products
+
+    useEffect(() => {
+        // Fetch products dynamically based on the category prop
+        fetch(`http://localhost:4000/category/${props.category}`)
+            .then((response) => response.json())
+            .then((data) => setCategoryProducts(data));
+    }, [props.category]); // Re-fetch when category prop changes
+
     const itemsPerPage = 9;
     const navigate = useNavigate(); // Initialize useNavigate hook for navigation
 
@@ -70,16 +79,9 @@ const ShopCategory = (props) => {
             </button>
 
             <div className="shopcategory-products">
-                {currentProducts.map((item, i) => (
-                    <Item
-                        key={i}
-                        id={item.id}
-                        name={item.name}
-                        image={item.image}
-                        new_price={item.new_price}
-                        old_price={item.old_price}
-                    />
-                ))}
+                {categoryProducts.map((item, i) => {
+                    return <Item key={i} id={item.id} name={item.name} image={item.image} new_price={item.new_price} old_price={item.old_price} />
+                })}
             </div>
 
             <div className="shopcategory-pagination">

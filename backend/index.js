@@ -216,6 +216,43 @@ app.get('/popularinwomen', async (req, res)=> {
     res.send(popular_in_women);
 })
 
+// Creating endpoint for category men only
+app.get('/category/men', async (req, res) => {
+    try {
+        let menProducts = await Product.find({ category: "men" });
+        console.log("Men category products fetched");
+        res.send(menProducts);
+    } catch (error) {
+        console.error("Error fetching men category products:", error);
+        res.status(500).send({ success: false, message: "Server Error" });
+    }
+});
+
+// Creating endpoint for category women only
+app.get('/category/women', async (req, res) => {
+    try {
+        let womenProducts = await Product.find({ category: "women" });  // Correct category
+        console.log("Women category products fetched");
+        res.send(womenProducts);  // Correct response
+    } catch (error) {
+        console.error("Error fetching women category products:", error);
+        res.status(500).send({ success: false, message: "Server Error" });
+    }
+});
+
+// Creating endpoint for category kid only
+app.get('/category/kid', async (req, res) => {
+    try {
+        let kidProducts = await Product.find({ category: "kid" });  // Correct category
+        console.log("Kid category products fetched");
+        res.send(kidProducts);  // Correct response
+    } catch (error) {
+        console.error("Error fetching kid category products:", error);
+        res.status(500).send({ success: false, message: "Server Error" });
+    }
+});
+
+
 //Creating middleware to fetch user 
     const fetchUser = async (req, res, next) => {
         const token = req.header('auth-token');
@@ -252,6 +289,13 @@ app.post('/removefromcart', fetchUser,async(req, res) =>{
     userData.cartData[req.body.itemId] -= 1;
     await Users.findOneAndUpdate({_id:req.user.id},{cartData:userData.cartData});
     res.send("Removed")
+})
+
+//Creating endpoint to get cart data
+app.post('/getcart', fetchUser, async (req, res) => {
+    console.log("GetCart");
+    let userData = await Users.findOne({_id:req.user.id})
+    res.json(userData.cartData);
 })
 
 app.listen(port, (error)=> {
